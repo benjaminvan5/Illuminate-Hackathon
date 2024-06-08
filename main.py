@@ -16,6 +16,8 @@ with st.container():
 placeholder = st.empty()
 with placeholder.container():
     st.write("test")
+    placeholder.empty()
+
 
 
 
