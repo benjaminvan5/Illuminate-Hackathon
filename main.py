@@ -20,15 +20,12 @@ with st.container():
         data_url = base64.b64encode(contents).decode("utf-8")
         file_.close()
 
-        st.markdown(
-            f'<img src="data:image/gif;base64,{data_url}" width="200">',
-            unsafe_allow_html=True,
-        )
+        st.markdown(f'<img src="data:image/gif;base64,{data_url}" width="200">',unsafe_allow_html=True,)
 
 with st.container():
     left_column, right_column  = st.columns((1,1))
+    st.divider()
     with left_column:
-        st.divider()
         medicine = st.text_input("What medicine are you currently taking?").lower()
         if len(medicine) > 0:
             if "clear" in medicine:
