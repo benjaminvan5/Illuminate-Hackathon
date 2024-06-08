@@ -23,8 +23,8 @@ with st.container():
         st.markdown(f'<img src="data:image/gif;base64,{data_url}" width="200">',unsafe_allow_html=True,)
 
 with st.container():
-    left_column, middle_column, right_column  = st.columns((2,1,2))
     st.divider()
+    left_column, middle_column, right_column  = st.columns((2,1,2))
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?").lower()
         if len(medicine) > 0:
