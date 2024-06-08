@@ -21,6 +21,10 @@ with placeholder.container():
     st.write("test")
     placeholder.empty()
 
-
+with open('saved_dictionary.pkl', 'wb') as f:
+    pickle.dump(test, f)
+        
+with open('saved_dictionary.pkl', 'rb') as f:
+    loaded_dict = pickle.load(f)
 
 
