@@ -16,7 +16,7 @@ with st.container():
     if len(medicine) > 0:
         daily_dosage= st.text_input(f"What is your daily dosage of {medicine}?")
     if len(medicine) > 0 and len(daily_dosage) > 0:
-        st.write(medicine, daily_dosage)
+        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
         dictionary[medicine] = daily_dosage
     elif len(medicine) == 0:
         st.write("Medicine not entered.")
