@@ -6,11 +6,15 @@ data = open('data.txt', 'r')
 
 
 with st.container():
-    st.subheader("Hi, I'm your digital medicine tracker :wave:")
-    st.title("MyMedMate")
-    st.write(
-        "MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions."
-    )
+    left_column, right_column  = st.columns((7,1))
+    with left_column:
+        st.subheader("Hi, I'm your digital medicine tracker :wave:")
+        st.title("MyMedMate")
+        st.write("MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions.")
+    with right_column:
+        st.image("apple.gif", width = 200)
+
+with st.containter():
     st.divider()
     medicine = st.text_input("What medicine are you currently taking?").lower()
     if len(medicine) > 0:
