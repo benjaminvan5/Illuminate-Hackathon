@@ -27,6 +27,6 @@ with open('saved_dictionary.pkl', 'wb') as f:
     pickle.dump(dictionary, f)
         
 with open('saved_dictionary.pkl', 'rb') as f:
-    loaded_dict = pickle.load(f)
+    dictionary = pickle.load(f)
 
 
