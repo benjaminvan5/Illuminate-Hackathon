@@ -1,4 +1,5 @@
 import streamlit as st
+from dictionary.py import dictionary
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
@@ -24,7 +25,7 @@ with st.container():
 
     with open('data.txt', 'r') as file:
         contents = file.read()
-        st.write(f"Text file contents: {contents}")
+        st.write(dictionary)
 
 
 
