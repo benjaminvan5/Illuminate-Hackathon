@@ -7,7 +7,7 @@ data = open('data.txt', 'r')
 
 
 with st.container():
-    left_column, right_column  = st.columns((7,1))
+    left_column, right_column  = st.columns((6,1))
     with left_column:
         st.subheader("Hi, I'm your digital medicine tracker :wave:")
         st.title("MyMedMate")
