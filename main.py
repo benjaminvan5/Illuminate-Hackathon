@@ -14,7 +14,7 @@ with st.container():
     with right_column:
         st.image("apple.gif", width = 200)
 
-with st.containter():
+with st.container():
     st.divider()
     medicine = st.text_input("What medicine are you currently taking?").lower()
     if len(medicine) > 0:
