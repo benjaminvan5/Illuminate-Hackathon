@@ -21,7 +21,7 @@ with st.container():
                     pass
         else:
             daily_dosage = int(st.text_input(f"What is your daily dosage of {medicine}?"))
-            if daily_dosage not >0:
+            if daily_dosage not > 0:
                 st.write("Invalid dosage entered. Please input a number.")
             else:
                 st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
