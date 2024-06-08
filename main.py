@@ -36,9 +36,14 @@ with st.container():
         else:
             daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?")
             if len(daily_dosage) > 0 and daily_dosage.isdigit():
-                st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
-                with open('data.txt', 'a') as file:
-                    file.write(f"({medicine}, {daily_dosage}),")
+                if daily_dosage.isdigit():
+                    st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
+                    with open('data.txt', 'a') as file:
+                        file.write(f"({medicine}, {daily_dosage}),")
+                else:
+                    st.write("Please enter an integer")
+
+    
     # Medicine input validation
     elif len(medicine) == 0:
         st.write("Medicine not entered.")
