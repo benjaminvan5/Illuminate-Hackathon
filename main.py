@@ -13,7 +13,7 @@ with st.container():
     )
     st.divider()
     medicine = st.text_input("What medicine are you currently taking?")
-    if type(medicine) == str:
+    if len(medicine) > 0:
         daily_dosage= st.text_input(f"What is your daily dosage of {medicine}?")
         st.write(medicine, daily_dosage)
     else:
