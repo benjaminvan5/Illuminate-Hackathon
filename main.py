@@ -1,4 +1,5 @@
 import streamlit as st
+import base64
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
@@ -13,6 +14,15 @@ with st.container():
         st.write("MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions.")
     with right_column:
         st.image("apple.gif", width = 200)
+        file_ = open("apple.gif", "rb")
+        contents = file_.read()
+        data_url = base64.b64encode(contents).decode("utf-8")
+        file_.close()
+
+        st.markdown(
+            f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">',
+            unsafe_allow_html=True,
+        )
 
 with st.container():
     st.divider()
