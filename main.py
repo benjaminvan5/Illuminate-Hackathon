@@ -2,7 +2,7 @@ import streamlit as st
 import medical_dictionary
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
-
+dictionary = {}
 with st.container():
     st.subheader("Hi, I'm your digital medicine tracker :wave:")
     st.title("MyMedMate")
