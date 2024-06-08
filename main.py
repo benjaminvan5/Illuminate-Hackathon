@@ -11,4 +11,4 @@ with st.container():
         f"text"
     )
     st.write("I'm poopy ")
-    st.write_stream("wiosejfuehjgruerhjgreuhjg")
+    
