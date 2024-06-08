@@ -20,7 +20,7 @@ with st.container():
         file_.close()
 
         st.markdown(
-            f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">',
+            f'<img src="data:image/gif;base64,{data_url}" width="200">',
             unsafe_allow_html=True,
         )
 
