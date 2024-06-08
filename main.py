@@ -4,12 +4,6 @@ st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
 data = open('data.txt', 'r')
 
-if 'something' not in st.session_state:
-    st.session_state.something = ''
-
-def submit():
-    st.session_state.something = st.session_state.widget
-    st.session_state.widget = ''
 
 with st.container():
     st.subheader("Hi, I'm your digital medicine tracker :wave:")
@@ -18,7 +12,7 @@ with st.container():
         "MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions."
     )
     st.divider()
-    medicine = st.text_input("What medicine are you currently taking?", key='widget', on_change=submit).lower()
+    medicine = st.text_input("What medicine are you currently taking?").lower()
     if len(medicine) > 0:
         if "clear" in medicine:
             st.write("Press Confirm if you want to clear your medicine and dosage information. Otherwise enter the medicine you are currently taking.")
