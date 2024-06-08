@@ -59,7 +59,7 @@ with st.container():
             st.write(dictionary)
 
     with right_column:
-        st.write("text")
+        st.subheader("Daily Tracker")
 
 
 placeholder = st.empty()
