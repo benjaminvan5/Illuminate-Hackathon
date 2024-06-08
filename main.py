@@ -31,8 +31,9 @@ with st.container():
 
     with open('data.txt', 'r') as file:
         contents = file.read()
-        st.write(dictionary)
+        
         st.write(contents)
+    st.write(dictionary)
 
 
 
