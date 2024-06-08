@@ -21,12 +21,12 @@ with st.container():
                     pass
         else:
             daily_dosage = int(st.text_input(f"What is your daily dosage of {medicine}?"))
-            if daily_dosage not > 0:
-                st.write("Invalid dosage entered. Please input a number.")
-            else:
+            if daily_dosage > 0:
                 st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
                 with open('data.txt', 'a') as file:
                     file.write(f"({medicine}, {daily_dosage}),")
+            else:
+                    st.write("Invalid dosage entered. Please input a number.")
     # Medicine input validation
     elif len(medicine) == 0:
         st.write("Medicine not entered.")
