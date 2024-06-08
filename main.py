@@ -24,7 +24,7 @@ with st.container():
             st.write(dictionary)
     elif len(medicine) == 0:
         st.write("Medicine not entered.")
-    st.write("Medicine: ", st.secrets["medicine"]
+    st.write("Medicine: ", st.secrets["medicine"])
         
 # line 32 thing makes nothing appear on screen
 placeholder = st.empty()
