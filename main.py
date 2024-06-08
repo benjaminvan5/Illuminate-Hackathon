@@ -35,7 +35,7 @@ with st.container():
                     pass
         else:
             daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?")
-            if len(daily_dosage) > 0 and daily_dosage.isdigit():
+            if len(daily_dosage) > 0:
                 if daily_dosage.isdigit():
                     st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
                     with open('data.txt', 'a') as file:
