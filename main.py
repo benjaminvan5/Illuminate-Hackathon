@@ -12,6 +12,7 @@ with st.container():
     st.divider()
     medicine = st.text_input("What medicine are you currently taking?")
     st.write(medicine)
+    st.empty()
 
 
 
