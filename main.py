@@ -11,5 +11,5 @@ with st.container():
         "MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions."
     )
     st.divider()
-    st.write("I'm poopy ")
+    medicine = st.text_input("What medicine are you currently taking?")
     
