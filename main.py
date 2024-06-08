@@ -15,7 +15,7 @@ with st.container():
     medicine = st.text_input("What medicine are you currently taking?").lower()
     if len(medicine) > 0:
         daily_dosage= st.text_input(f"What is your daily dosage of {medicine}?")
-    elif len(daily_dosage) > 0:
+    if len(medicine) > 0 and len(daily_dosage) > 0:
         st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
         dictionary[medicine] = daily_dosage
     elif len(medicine) == 0:
@@ -32,5 +32,3 @@ with open('saved_dictionary.pkl', 'wb') as f:
         
 with open('saved_dictionary.pkl', 'rb') as f:
     dictionary = pickle.load(f)
-
-
