@@ -2,12 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
-data = open('data.txt', 'r')
-medical_information = data.read()
-if medical_information != "":
-  medical_information = medical_information.rstrip(medical_information[-1])
-  dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
-else: dictionary = {}
+
 
 with st.container():
     st.subheader("Hi, I'm your digital medicine tracker :wave:")
@@ -33,7 +28,12 @@ with st.container():
         contents = file.read()
         st.write(dictionary)
         st.write(contents)
-
+data = open('data.txt', 'r')
+medical_information = data.read()
+if medical_information != "":
+  medical_information = medical_information.rstrip(medical_information[-1])
+  dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
+else: dictionary = {}
 
 
 
