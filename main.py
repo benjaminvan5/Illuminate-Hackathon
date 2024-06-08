@@ -18,6 +18,7 @@ with st.container():
         if len(daily_dosage) > 0:
             st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
             dictionary[medicine] = daily_dosage
+            st.write(dictionary)
     elif len(medicine) == 0:
         st.write("Medicine not entered.")
         
