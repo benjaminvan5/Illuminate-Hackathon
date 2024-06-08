@@ -1,11 +1,16 @@
 import streamlit as st
 import pickle
 
-dictionary = {}
-
-
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
+dictionary = {}
+
+inputFile = 'main.data'
+if os.path.exists(inputFile) and os.path.getsize(inputFile) > 0:
+    with open(inputFile, 'rb') as fd:
+        dictionary = pickle.load(fd)
+else:
+    dictionary = {}
 
 
 with st.container():
@@ -32,8 +37,6 @@ with placeholder.container():
     placeholder.empty()
 
 outputFile = 'main.data'
-fw = open(outputFile, 'wb')
-pickle.dump(dictionary, fw)
-fw.close()
-        
+with open(outputFile, 'wb') as fw:
+    pickle.dump(dictionary, fw)
 
