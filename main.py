@@ -14,4 +14,4 @@ with st.container():
     st.write(
         f"text"
     )
-    st.write("[Learn More >](Hi")
+    st.write("I'm poopy pants")
