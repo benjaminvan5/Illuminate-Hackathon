@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
-
+test = []
 
 with st.container():
     st.subheader("Hi, I'm your digital medicine tracker :wave:")
@@ -12,4 +12,4 @@ with st.container():
     )
     st.divider()
     medicine = st.text_input("What medicine are you currently taking?")
-    
+    test.append(medicine)
