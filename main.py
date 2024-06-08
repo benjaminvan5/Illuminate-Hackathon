@@ -20,13 +20,11 @@ with st.container():
                 with open('data.txt', 'w') as file:
                     pass
         else:
-            daily_dosage = float(st.text_input(f"What is your daily dosage of {medicine}?"))
-            if daily_dosage > 0:
+            daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?")
+            if len(daily_dosage) > 0:
                 st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
                 with open('data.txt', 'a') as file:
                     file.write(f"({medicine}, {daily_dosage}),")
-            else:
-                    st.write("Invalid dosage entered. Please input a number.")
     # Medicine input validation
     elif len(medicine) == 0:
         st.write("Medicine not entered.")
