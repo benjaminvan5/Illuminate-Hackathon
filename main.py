@@ -15,6 +15,7 @@ with st.container():
     medicine = st.text_input("What medicine are you currently taking?").lower()
     if len(medicine) > 0:
         daily_dosage= st.text_input(f"What is your daily dosage of {medicine}?")
+    if len(medicine) > 0 and len(daily_dosage) > 0:
         st.write(medicine, daily_dosage)
     else:
         st.write("Medicine not entered.")
