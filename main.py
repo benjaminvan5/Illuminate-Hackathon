@@ -1,5 +1,5 @@
 import streamlit as st
-import medical_dictionary.py
+from medical_dictionary.py import dictionary
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
