@@ -2,8 +2,7 @@ import streamlit as st
 import pickle
 
 dictionary = {}
-with open('saved_dictionary.pkl', 'rb') as f:
-    dictionary = pickle.load(f)
+
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
