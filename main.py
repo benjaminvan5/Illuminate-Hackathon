@@ -12,7 +12,7 @@ with st.container():
         "MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions."
     )
     st.divider()
-    medicine = st.text_input("What medicine are you currently taking?")
+    medicine = st.text_input("What medicine are you currently taking?").lower()
     if len(medicine) > 0:
         daily_dosage= st.text_input(f"What is your daily dosage of {medicine}?")
         st.write(medicine, daily_dosage)
