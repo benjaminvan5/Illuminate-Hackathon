@@ -31,7 +31,9 @@ with placeholder.container():
     st.write("test")
     placeholder.empty()
 
-with open('saved_dictionary.pkl', 'wb') as f:
-    pickle.dump(dictionary, f)
+outputFile = 'main.data'
+fw = open(outputFile, 'wb')
+pickle.dump(dictionary, fw)
+fw.close()
         
 
