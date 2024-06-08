@@ -31,6 +31,7 @@ with st.container():
             st.write("Press Confirm if you want to clear your medicine and dosage information. Otherwise enter the medicine you are currently taking.")
             clear_yes = st.button("Confirm")
             if clear_yes:
+                clear_yes = "cleared"
                 with open('data.txt', 'w') as file:
                     pass
         else:
