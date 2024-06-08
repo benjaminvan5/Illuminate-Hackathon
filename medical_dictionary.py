@@ -1,5 +1,5 @@
 data = open('data.txt', 'r')
-dictionary = {}
+global dictionary = {}
 medical_information = data.read()
 if medical_information != "":
   medical_information = medical_information.rstrip(medical_information[-1])
