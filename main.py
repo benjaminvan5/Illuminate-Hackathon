@@ -14,8 +14,11 @@ with st.container():
     medicine = st.text_input("What medicine are you currently taking?").lower()
     if len(medicine) > 0:
         if "clear" in medicine:
-            with open('data.txt', 'w') as file:
-                pass
+            st.write("Press Confirm if you want to clear your medicine and dosage information. Otherwise enter the medicine you are currently taking.")
+            clear_yes = st.button("Confirm")
+            if clear_yes:
+                with open('data.txt', 'w') as file:
+                    pass
         daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?")
         if len(daily_dosage) > 0:
             st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
