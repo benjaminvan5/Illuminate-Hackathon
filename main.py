@@ -1,4 +1,5 @@
 import streamlit as st
+import pickle
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
