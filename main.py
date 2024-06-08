@@ -8,7 +8,6 @@ if medical_information != "":
   medical_information = medical_information.rstrip(medical_information[-1])
   dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
 else: dictionary = {}
-print(dictionary)
 with st.container():
     st.subheader("Hi, I'm your digital medicine tracker :wave:")
     st.title("MyMedMate")
