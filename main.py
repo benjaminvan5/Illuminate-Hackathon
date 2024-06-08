@@ -6,13 +6,6 @@ st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
 dictionary = {}
 
-inputFile = 'main.data'
-if os.path.exists(inputFile) and os.path.getsize(inputFile) > 0:
-    with open(inputFile, 'rb') as fd:
-        dictionary = pickle.load(fd)
-else:
-    dictionary = {}
-
 
 with st.container():
     st.subheader("Hi, I'm your digital medicine tracker :wave:")
@@ -36,8 +29,3 @@ placeholder = st.empty()
 with placeholder.container():
     st.write("test")
     placeholder.empty()
-
-outputFile = 'main.data'
-with open(outputFile, 'wb') as fw:
-    pickle.dump(dictionary, fw)
-
