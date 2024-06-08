@@ -13,7 +13,6 @@ with st.container():
         st.title("MyMedMate")
         st.write("MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions.")
     with right_column:
-        st.image("apple.gif", width = 200)
         file_ = open("apple.gif", "rb")
         contents = file_.read()
         data_url = base64.b64encode(contents).decode("utf-8")
