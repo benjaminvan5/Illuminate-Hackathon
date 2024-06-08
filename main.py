@@ -11,7 +11,10 @@ with st.container():
     )
     st.divider()
     medicine = st.text_input("What medicine are you currently taking?")
-    st.write(medicine)
+    if type(medicine) == str:
+        st.write("Medicine not entered.")
+    else:
+        st.write(medicine)
 
 placeholder = st.empty()
 with placeholder.container():
