@@ -125,7 +125,7 @@ with st.container():
                 col1, col2, col3 = st.columns((1.4, 3.5, 0.7)) # columns for user input, progess bar and metric
                 
                 with col1:
-                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = 'myvar', min_value = 0, on_change=update_dosage)
+                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 0, on_change=update_dosage)
                     
                  
                 with col2:
