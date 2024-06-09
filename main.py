@@ -4,6 +4,7 @@ import base64
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
 data = open('data.txt', 'r')
+dosagesdata = open('dosages.txt', 'r')
 
 def clear_text(): # for clearing medicine and dosage
     st.session_state.medicine = ""
