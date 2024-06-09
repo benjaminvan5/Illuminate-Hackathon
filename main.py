@@ -5,6 +5,9 @@ st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
 data = open('data.txt', 'r')
 
+def clear_text():
+    st.session_state.my_text = st.session_state.widget
+    st.session_state.widget = ""
 
 with st.container():
     left_column, right_column  = st.columns((4,1))
@@ -26,7 +29,7 @@ with st.container():
     st.divider()
     left_column, middle_column, right_column  = st.columns((2,1,2))
     with left_column:
-        medicine = st.text_input("What medicine are you currently taking?").lower()
+        medicine = st.text_input("What medicine are you currently taking?", key='widget', on_change=clear_text).lower()
         if len(medicine) > 0:
             if "/clear" in medicine:
                 st.write("Press Confirm if you want to clear your medicine and dosage information. Otherwise enter the medicine you are currently taking.")
