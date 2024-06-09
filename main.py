@@ -28,7 +28,7 @@ with st.container():
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?").lower()
         if len(medicine) > 0:
-            if "clear" in medicine:
+            if "/clear" in medicine:
                 st.write("Press Confirm if you want to clear your medicine and dosage information. Otherwise enter the medicine you are currently taking.")
                 clear_yes = st.button("Confirm")
                 if clear_yes:
