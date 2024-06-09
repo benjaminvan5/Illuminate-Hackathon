@@ -29,7 +29,7 @@ with st.container():
     global file
     st.divider()
     left_column, middle_column, right_column  = st.columns((2,0.7,2))
-    
+
     # daily tracker
     if len(dictionary) > 0:
         with right_column:
@@ -80,6 +80,10 @@ with st.container():
                         with open('dosages.txt', 'w') as file:
                             pass
                         st.rerun()
+
+                
+                show_cleardialog()
+
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
         if len(medicine) > 0 and not ("," in medicine):
@@ -157,10 +161,6 @@ with st.container():
 
 
 
-    
-
-                
-                show_cleardialog()
 
 placeholder = st.empty()
 with placeholder.container():
