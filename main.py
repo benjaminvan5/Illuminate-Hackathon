@@ -4,7 +4,6 @@ import base64
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
 data = open('data.txt', 'r')
-dosagesdata = open('dosages.txt', 'r')
 
 def clear_text(): # for clearing medicine and dosage
     st.session_state.medicine = ""
@@ -91,16 +90,14 @@ with st.container():
 
         
         # Dictionary to store dosages
-        dosages_information = dosagesdata.read()
-        if dosages_information != "":
-          dosages_information = dosages_information.rstrip(dosages_information[-1])
-          dosages_dictionary = dict([x.split(',') for x in dosages_information[1:-1].split('),(')])
+        if medical_information != "":
+          medical_information = medical_information.rstrip(medical_information[-1])
+          dosages_dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
         else: dosages_dictionary = {}
         with open('dosages.txt', 'r') as file:
             contents = file.read()
             st.write(contents)
             st.write(dosages_dictionary)
-    
     # Function for updating dosage to a text file
     def update_dosage():
         with open('dosages.txt', 'a') as file:
