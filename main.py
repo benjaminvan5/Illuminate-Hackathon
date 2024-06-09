@@ -90,10 +90,10 @@ with st.container():
 
 
      # Function for updating dosage to a text file   
-     def update_dosage():
-        with open('dosages.txt', 'a') as file:
-            file.write(f"(Medicine: {medicine}. Dosages: {buttons})")
-        pass
+         def update_dosage():
+            with open('dosages.txt', 'a') as file:
+                file.write(f"(Medicine: {medicine}. Dosages: {buttons})")
+            pass
 
     
     # daily tracker
