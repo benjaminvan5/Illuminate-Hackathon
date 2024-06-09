@@ -31,7 +31,7 @@ with st.container():
     left_column, middle_column, right_column  = st.columns((2,1,2))
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
-        if len(medicine) > 0:
+        if len(medicine) > 0 and not ("," in medicine):
 
         #radio buttons
             medication_form_name = ['Tablet', 'Liquid', 'Capsule', 'Topical']
@@ -74,8 +74,8 @@ with st.container():
     
         
         # Medicine input validation
-        elif len(medicine) == 0:
-            st.write("Medicine not entered.")
+        elif len(medicine) == 0 or ',' in medicine:
+            st.write("Invalid Medicine Name.")
         medical_information = data.read()
 
         # Converts each (medicine, dosage) pair into a key-value element in a dictionary 
