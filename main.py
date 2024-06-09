@@ -88,6 +88,14 @@ with st.container():
             st.write(contents)
             st.write(dictionary)
 
+
+     # Function for updating dosage to a text file   
+     def update_dosage():
+        with open('dosages.txt', 'a') as file:
+            file.write(f"(Medicine: {medicine}. Dosages: {buttons})")
+        pass
+
+    
     # daily tracker
     if len(dictionary) > 0:
         with right_column:
@@ -103,7 +111,7 @@ with st.container():
                 col1, col2, col3 = st.columns((1.4, 3, 1)) # columns for user input, progess bar and metric
                 
                 with col1:
-                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}')
+                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', on_change=update_dosage)
                  
                 with col2:
                     if buttons <= int(dictionary[medicine.lower()]):
@@ -119,7 +127,7 @@ with st.container():
                     st.write(f"**{buttons}**")
 
                 count += 1  
-                
+           # Clear button logic     
             global clear_button
             clear_button = st.button("Clear all data")
             if clear_button:
@@ -131,6 +139,8 @@ with st.container():
                     if st.button("Confirm", on_click=clear_text):
                         clear_button = False
                         with open('data.txt', 'w') as file:
+                            pass
+                        with open('dosages.txt', 'w') as file:
                             pass
                         st.rerun()
 
