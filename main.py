@@ -108,11 +108,11 @@ with st.container():
                 progress_bar = col3.progress(10)
                 count += 1 
                 with col1:
-                    increase = st.button("text", key = count) # adding a unique key removes the error DuplicateWidgetID: There are multiple identical st.selectbox widgets with the same generated key.
+                    increase = st.button("increase", key = count) # adding a unique key removes the error DuplicateWidgetID: There are multiple identical st.selectbox widgets with the same generated key.
                     if increase:
                         pass
                 with col2:
-                    decrease = st.button("text", key = count + 100)
+                    decrease = st.button("decrease", key = count + 100)
                     if increase:
                         pass
                 with col4:
