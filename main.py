@@ -91,7 +91,7 @@ with st.container():
     # Function for updating dosage to a text file
     def update_dosage():
         with open('dosages.txt', 'a') as file:
-            file.write(f"(Medicine: {medicine}. Dosages: {buttons})")
+            file.write(f"({medicine.lower()}, {buttons}),") #buttons is the number on the right that you increase/decrease on the website
         pass
 
         # Dictionary to store dosages
