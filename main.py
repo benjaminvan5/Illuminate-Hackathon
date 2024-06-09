@@ -30,59 +30,6 @@ with st.container():
     st.divider()
     left_column, middle_column, right_column  = st.columns((2,0.7,2))
 
-    # daily tracker
-    if len(dictionary) > 0:
-        with right_column:
-            st.subheader("Daily Tracker 📅")
-            count = 0
-            for medicine in dictionary:
-                medicine = medicine[0].upper() + medicine[1:] # capatalises 1st letter of medicine
-                left, right = st.columns((4.9, 0.7)) # column for medicine name and amount of dose taken today
-               
-                with left:
-                    st.write(f"**{medicine}**")
-                    
-                col1, col2, col3 = st.columns((1.4, 3.5, 0.7)) # columns for user input, progess bar and metric
-                
-                with col1:
-                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 0, on_change=update_dosage)
-                    
-                 
-                with col2:
-                    if buttons <= int(dictionary[medicine.lower()]):
-                        progress_bar = col2.progress(buttons / int(dictionary[medicine.lower()]))
-                    else:
-                        progress_bar = col2.progress(100) # max value of progress bar is 100
-                
-                with col3:
-                    percent_increase = str(round(buttons / int(dictionary[medicine.lower()]) * 100)) + "%" 
-                    col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
-                    st.write(f"Medicine: {medicine}. Dosages: {buttons} - debug purposes")
-                    
-                with right:
-                    st.write(f"**{buttons}**")
-
-                count += 1  
-         
-            #Clear button logic
-            global clear_button
-            clear_button = st.button("Clear all data")
-            if clear_button:
-                @st.experimental_dialog("Clear all entries?", width="small")
-                def show_cleardialog():
-                    global clear_button, file
-                    st.write("Press Confirm if you want to clear all of your medicine and dosage information.")
-
-                    if st.button("Confirm", on_click=clear_text):
-                        clear_button = False
-                        with open('data.txt', 'w') as file:
-                            pass
-                        with open('dosages.txt', 'w') as file:
-                            pass
-                        st.rerun()
-
-                
-                show_cleardialog()
 
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
@@ -142,6 +89,7 @@ with st.container():
             contents = file.read()
             st.write(contents)
             st.write(dictionary)
+        
 
         
         # Dictionary to store dosages
@@ -158,6 +106,60 @@ with st.container():
         with open('dosages.txt', 'a') as file:
             file.write(f"({medicine.lower()}, {buttons}),") #buttons is the number on the right that you increase/decrease on the website
         pass
+    
+    # daily tracker
+    if len(dictionary) > 0:
+        with right_column:
+            st.subheader("Daily Tracker 📅")
+            count = 0
+            for medicine in dictionary:
+                medicine = medicine[0].upper() + medicine[1:] # capatalises 1st letter of medicine
+                left, right = st.columns((4.9, 0.7)) # column for medicine name and amount of dose taken today
+               
+                with left:
+                    st.write(f"**{medicine}**")
+                    
+                col1, col2, col3 = st.columns((1.4, 3.5, 0.7)) # columns for user input, progess bar and metric
+                
+                with col1:
+                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 0, on_change=update_dosage)
+                    
+                 
+                with col2:
+                    if buttons <= int(dictionary[medicine.lower()]):
+                        progress_bar = col2.progress(buttons / int(dictionary[medicine.lower()]))
+                    else:
+                        progress_bar = col2.progress(100) # max value of progress bar is 100
+                
+                with col3:
+                    percent_increase = str(round(buttons / int(dictionary[medicine.lower()]) * 100)) + "%" 
+                    col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
+                    st.write(f"Medicine: {medicine}. Dosages: {buttons} - debug purposes")
+                    
+                with right:
+                    st.write(f"**{buttons}**")
+
+                count += 1  
+         
+            #Clear button logic
+            global clear_button
+            clear_button = st.button("Clear all data")
+            if clear_button:
+                @st.experimental_dialog("Clear all entries?", width="small")
+                def show_cleardialog():
+                    global clear_button, file
+                    st.write("Press Confirm if you want to clear all of your medicine and dosage information.")
+
+                    if st.button("Confirm", on_click=clear_text):
+                        clear_button = False
+                        with open('data.txt', 'w') as file:
+                            pass
+                        with open('dosages.txt', 'w') as file:
+                            pass
+                        st.rerun()
+
+                
+                show_cleardialog()
 
 
 
