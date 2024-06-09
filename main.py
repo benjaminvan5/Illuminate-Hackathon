@@ -31,10 +31,10 @@ with st.container():
 with st.container():
     global file
     st.divider()
-    left_column, middle_column, right_column = st.columns((2, 0.7, 2))
+    left_column, middle_column, right_column = st.columns((2, 0.7, 2)) # left column is for user medication input, right column is for daily tracker and middle is for separation between the two
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
-        if len(medicine) > 0 and not ("," in medicine):
+        if len(medicine) > 0 and not ("," in medicine): # if user inputs a comma (eg Panadol,) then it causes the dictionary to malfunction hence "and not ("," in medicine)" is added 
 
             # radio buttons
             medication_form_name = ['Tablet', 'Liquid', 'Capsule', 'Topical']
@@ -55,7 +55,7 @@ with st.container():
                     with middle_column:
                         st.write("mL")
                 daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?", key="dosage")
-                if len(daily_dosage) > 0:
+                if len(daily_dosage) > 0: #different forms of medication have different if statements because they have different units (tablets, capsules or mL)
                     if daily_dosage.isdigit() and medication_form == "Liquid":
                         st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
                         with open('data.txt', 'a') as file:
@@ -130,19 +130,19 @@ with st.container():
                 with left:
                     st.write(f"**{medicine}**")
 
-                col1, col2, col3 = st.columns((1.4, 3.5, 0.7))  # columns for user input, progess bar and metric
-
-                with col1:
+                col1, col2, col3 = st.columns((1.4, 3.5, 0.7))  # columns for user number input, progess bar and metric (metric is daily dosage and percentage of daily dosage taken)
+                
+                with col1: # user number input
                     dosages = st.number_input("test", step=1, label_visibility="collapsed", key=f'{count}', min_value=0,
                                               on_change=update_dosage)
 
-                with col2:
+                with col2: # progress bar
                     if dosages <= int(dictionary[medicine.lower()]):
                         progress_bar = col2.progress(dosages / int(dictionary[medicine.lower()]))
                     else:
                         progress_bar = col2.progress(100)  # max value of progress bar is 100
 
-                with col3:
+                with col3: # metric (metric is daily dosage and percentage of daily dosage taken)
                     if len(dosages_dictionary) > 0:
                         percent_increase = str(round(int(dosages_dictionary[medicine.lower()]) / int(dictionary[medicine.lower()]) * 100)) + "%"
                         col3.metric(label="secret", value=f"{dictionary[medicine.lower()]}", delta=percent_increase,
