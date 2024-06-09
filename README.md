@@ -1,6 +1,6 @@
 # Illuminate-Hackathon - MyMedMate
 This is a medical application designed to help people keep track of their medicine. Users can input their medicine and their recommended dosage and track it over time.
-The medicine input is stored as a string and the dosage input accepts integers
-Different types of dosages can be selected
-Users can clear all of their medicine data using /clear in the medicine input
-The medicine-dosage pair is then stored in a dictionary to use in the daily tracker
+The medicine input is stored as a string and the dosage input accepts integers.
+Different types of dosages can be selected.
+Users can clear all of their medicine data using /clear in the medicine input.
+The medicine-dosage pair is then stored in a dictionary to use in the daily tracker.
