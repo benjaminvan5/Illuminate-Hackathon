@@ -94,9 +94,6 @@ with st.container():
             dictionary = {}
         with open('data.txt', 'r') as file:
             contents = file.read()
-            st.write(contents)
-            st.write(dictionary)
-
 
 
         # Dictionary to store dosages
