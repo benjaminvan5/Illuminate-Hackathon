@@ -144,7 +144,7 @@ with st.container():
                         progress_bar = col2.progress(100)  # max value of progress bar is 100
 
                 with col3: # metric (metric is daily dosage and percentage of daily dosage taken)
-                    percent_increase = str(round(int(dosages)) / int(dictionary[medicine.lower()]) * 100) + "%"
+                    percent_increase = str(round(dosages / int(dictionary[medicine.lower()]) * 100)) + "%"
                     col3.metric(label="secret", value=f"{dictionary[medicine.lower()]}", delta=percent_increase,
                             label_visibility="collapsed")
 
