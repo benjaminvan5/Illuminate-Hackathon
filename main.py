@@ -131,7 +131,7 @@ with st.container():
                             pass
                         st.rerun()
 
-
+                
                 show_cleardialog()
 
 placeholder = st.empty()
