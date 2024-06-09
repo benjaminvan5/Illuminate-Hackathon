@@ -28,7 +28,7 @@ with st.container():
 with st.container():
     global file
     st.divider()
-    left_column, middle_column, right_column  = st.columns((2,1,2))
+    left_column, middle_column, right_column  = st.columns((2,0.7,2))
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
         if len(medicine) > 0 and not ("," in medicine):
@@ -99,19 +99,19 @@ with st.container():
     # daily tracker
     if len(dictionary) > 0:
         with right_column:
-            st.subheader("Daily Tracker")
+            st.subheader("Daily Tracker 📅")
             count = 0
             for medicine in dictionary:
                 medicine = medicine[0].upper() + medicine[1:] # capatalises 1st letter of medicine
-                left, right = st.columns((4.4, 1)) # column for medicine name and amount of dose taken today
+                left, right = st.columns((4.9, 0.7)) # column for medicine name and amount of dose taken today
                
                 with left:
                     st.write(f"**{medicine}**")
                     
-                col1, col2, col3 = st.columns((1.4, 3, 1)) # columns for user input, progess bar and metric
+                col1, col2, col3 = st.columns((1.4, 3.5, 0.7)) # columns for user input, progess bar and metric
                 
                 with col1:
-                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', on_change=update_dosage)
+                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 0, on_change=update_dosage)
                  
                 with col2:
                     if buttons <= int(dictionary[medicine.lower()]):
