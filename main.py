@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import asyncio
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
@@ -105,7 +106,7 @@ with st.container():
         
 
     # Function for updating dosage to a text file
-    def update_dosage():
+    async def update_dosage():
         with open('dosages.txt', 'a') as file:
             file.write(f"({medicine.lower()}, {buttons}),") #buttons is the number on the right that you increase/decrease on the website
         pass
