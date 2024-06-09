@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import datetime
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
@@ -178,8 +179,7 @@ with st.container():
         file_.close()
         st.markdown(f'<img src="data:image/gif;base64,{data_url}" width="400" style="display: block; margin: 0 auto;">', unsafe_allow_html=True)
 
-
-placeholder = st.empty()
-with placeholder.container():
-    st.write("test")
-    placeholder.empty()
+# if time is 0:0:0.0 then it's a new day so the dosages that the user has taken resets
+today = str(datetime.datetime.today())
+if today[11] == 0 and today[12] == 0 and today[14] == 0 and today[15] == 0 and today[17] == 0 and today[18] == 0 and today[20]:
+    dosages_dictionary = {}
