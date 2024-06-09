@@ -31,16 +31,16 @@ with st.container():
 with st.container():
     global file
     st.divider()
-    left_column, middle_column, right_column = st.columns((2, 0.7, 2))
+    left_column, middle_column, right_column = st.columns((2, 0.7, 2)) # left column is for user medication input, right column is for daily tracker and middle is just for separation
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
-        if len(medicine) > 0 and not ("," in medicine):
+        if len(medicine) > 0 and not ("," in medicine): # if the user inputs a comma (eg. Panadol,) then it breaks the dictionary algorithm
 
             # radio buttons
-            medication_form_name = ['Tablet', 'Liquid', 'Capsule', 'Topical']
+            medication_form_name = ['Tablet', 'Liquid', 'Capsule', 'Topical'] 
             medication_form = st.radio('Form of Medication', medication_form_name, index=None)
             with middle_column:
-                st.write('#')  # blank text to make units of medication aligned with user input
+                st.write('#')  # blank text to make units of medication (mL, tablets, capsules) aligned with user input
                 st.write('#')
                 st.write('#')
 
@@ -56,7 +56,7 @@ with st.container():
                         st.write("mL")
                 daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?", key="dosage")
                 if len(daily_dosage) > 0:
-                    if daily_dosage.isdigit() and medication_form == "Liquid":
+                    if daily_dosage.isdigit() and medication_form == "Liquid": # different forms of medication have different if statements as they have different units
                         st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
                         with open('data.txt', 'a') as file:
                             file.write(f"({medicine}, {daily_dosage}),")
@@ -102,30 +102,30 @@ with st.container():
 
 
     # daily tracker
-    if len(dictionary) > 0:
+    if len(dictionary) > 0: # daily tracker only shows if the user has inputted a medicine
         with right_column:
             st.subheader("Daily Tracker 📅")
             count = 0
             for medicine in dictionary:
                 medicine = medicine[0].upper() + medicine[1:]  # capatalises 1st letter of medicine
-                left, right = st.columns((4.9, 0.7))  # column for medicine name and amount of dose taken today
+                left, right = st.columns((4.9, 0.7))  # column for medicine name and amount of dose taken today.
 
                 with left:
                     st.write(f"**{medicine}**")
 
                 col1, col2, col3 = st.columns((1.4, 3.5, 0.7))  # columns for user input, progess bar and metric
 
-                with col1:
+                with col1: # user number input
                     dosages = st.number_input("test", step=1, label_visibility="collapsed", key=f'{count}', min_value=0,
                                               on_change=update_dosage)
 
-                with col2:
+                with col2: # progress bar
                     if dosages <= int(dictionary[medicine.lower()]):
                         progress_bar = col2.progress(dosages / int(dictionary[medicine.lower()]))
                     else:
-                        progress_bar = col2.progress(100)  # max value of progress bar is 100
+                        progress_bar = col2.progress(100)  # max value of progress bar is 100. Without else statement program would crash if dosages > int(dictionary[medicine.lower()])
 
-                with col3:
+                with col3: # daily dosage + percentage taken today
                     percent_increase = str(round(dosages / int(dictionary[medicine.lower()]) * 100)) + "%"
                     col3.metric(label="secret", value=f"{dictionary[medicine.lower()]}", delta=percent_increase,
                                 label_visibility="collapsed")
