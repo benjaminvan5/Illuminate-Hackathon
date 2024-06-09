@@ -113,25 +113,22 @@ with st.container():
                         pass
                 with col4:
                     col4.metric(label = "5", value = "7", delta = "10%", label_visibility = "collapsed")
-    global clear_button
-    clear_button = st.button("Clear all data")
-    if clear_button:
-        @st.experimental_dialog("Clear all entries?", width="small")
-        def show_cleardialog():
-            global clear_button, file
-            st.write("Press Confirm if you want to clear all of your medicine and dosage information.")
+            global clear_button
+            clear_button = st.button("Clear all data")
+            if clear_button:
+                @st.experimental_dialog("Clear all entries?", width="small")
+                def show_cleardialog():
+                    global clear_button, file
+                    st.write("Press Confirm if you want to clear all of your medicine and dosage information.")
 
-            if st.button("Confirm", on_click=clear_text):
-                clear_button = False
-                with open('data.txt', 'w') as file:
-                    pass
-                st.rerun()
-
-
+                    if st.button("Confirm", on_click=clear_text):
+                        clear_button = False
+                        with open('data.txt', 'w') as file:
+                            pass
+                        st.rerun()
 
 
-        show_cleardialog()
-
+                show_cleardialog()
 
 placeholder = st.empty()
 with placeholder.container():
