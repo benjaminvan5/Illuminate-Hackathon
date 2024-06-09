@@ -105,7 +105,6 @@ with st.container():
             dosages_information = dosages_data.read()
             if dosages_information != "":
                 dosages_information = dosages_information.rstrip(dosages_information[-1])
-                dosages_dictionary = dict([x.split(',') for x in dosages_information[1:-1].split('),(')])
             else:
                 dosages_dictionary = {}
             with open('dosages.txt', 'r') as file:
