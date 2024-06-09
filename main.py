@@ -2,7 +2,7 @@ import streamlit as st
 import base64
 import datetime
 
-st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
+st.set_page_config(page_title="MyMedMate", page_icon=":tada:", layout="wide")
 
 #Data for medication + daily dosage, dosages
 data = open('data.txt', 'r')
