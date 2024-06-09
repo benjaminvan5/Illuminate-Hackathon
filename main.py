@@ -122,6 +122,7 @@ with st.container():
                 
                 with col1:
                     buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 0, on_change=update_dosage)
+                    st.write(dosage_dictionary)
                  
                 with col2:
                     if buttons <= int(dictionary[medicine.lower()]):
