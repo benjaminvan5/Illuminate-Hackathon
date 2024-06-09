@@ -112,10 +112,10 @@ with st.container():
                 col1, col2, col3, col4 = st.columns((1, 1, 3.5, 0.7)) # columns for user input, progess bar and metric
                 
                 with col1:
-                    increase = st.button("Increase")
+                    increase = st.button("Increase", key = f"increase_ + {count}")
 
                 with col2:
-                    decrease = st.button("Decrease")
+                    decrease = st.button("Decrease", key = f"decrease_ + {count}")
                  
                 with col3:
                     dosages = 0 # remove dosages
