@@ -29,8 +29,6 @@ with st.container():
     global file
     st.divider()
     left_column, middle_column, right_column  = st.columns((2,0.7,2))
-
-
     with left_column:
         medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
         if len(medicine) > 0 and not ("," in medicine):
@@ -64,7 +62,7 @@ with st.container():
                         with open('data.txt', 'a') as file:
                             file.write(f"({medicine}, {daily_dosage}),")
                     elif daily_dosage.isdigit() and medication_form == "Tablet":
-                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tablets")
+                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tables")
                         with open('data.txt', 'a') as file:
                             file.write(f"({medicine}, {daily_dosage}),")
                     elif daily_dosage.isdigit() and medication_form == "Capsule":
@@ -85,31 +83,20 @@ with st.container():
           medical_information = medical_information.rstrip(medical_information[-1])
           dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
         else: dictionary = {}
-        
-        
-
-        
-        # Dictionary to store dosages
-        if medical_information != "":
-          medical_information = medical_information.rstrip(medical_information[-1])
-          dosages_dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
-        else: dosages_dictionary = {}
         with open('data.txt', 'r') as file:
             contents = file.read()
             st.write(contents)
             st.write(dictionary)
-        with open('dosages.txt', 'r') as file:
-            contents = file.read()
-            st.write(contents)
-            st.write(dosages_dictionary)
-        
+
+
 
     # Function for updating dosage to a text file
     def update_dosage():
         with open('dosages.txt', 'a') as file:
-            file.write(f"({medicine.lower()}, {buttons}),") #buttons is the number on the right that you increase/decrease on the website
+            file.write(f"({medicine.lower()}, {dosages}),") #buttons is the number on the right that you increase/decrease on the website
         pass
-    
+
+
     # daily tracker
     if len(dictionary) > 0:
         with right_column:
@@ -125,22 +112,21 @@ with st.container():
                 col1, col2, col3 = st.columns((1.4, 3.5, 0.7)) # columns for user input, progess bar and metric
                 
                 with col1:
-                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 1, on_change=update_dosage)
-                    
+                    dosages = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 0, on_change=update_dosage)
                  
                 with col2:
-                    if buttons <= int(dictionary[medicine.lower()]):
-                        progress_bar = col2.progress(buttons / int(dictionary[medicine.lower()]))
+                    if dosages <= int(dictionary[medicine.lower()]):
+                        progress_bar = col2.progress(dosages / int(dictionary[medicine.lower()]))
                     else:
                         progress_bar = col2.progress(100) # max value of progress bar is 100
                 
                 with col3:
-                    percent_increase = str(round(buttons / int(dictionary[medicine.lower()]) * 100)) + "%" 
+                    percent_increase = str(round(dosages / int(dictionary[medicine.lower()]) * 100)) + "%"
                     col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
-                    st.write(f"Medicine: {medicine}. Dosages: {buttons} - debug purposes")
+                    st.write(f"Medicine: {medicine}. Dosages: {dosages} - debug purposes")
                     
                 with right:
-                    st.write(f"**{buttons}**")
+                    st.write(f"**{dosages}**")
 
                 count += 1  
          
@@ -165,7 +151,15 @@ with st.container():
                 show_cleardialog()
 
 
-
+        # Dictionary to store dosages
+        if medical_information != "":
+          medical_information = medical_information.rstrip(medical_information[-1])
+          dosages_dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
+        else: dosages_dictionary = {}
+        with open('dosages.txt', 'r') as file:
+            dosages_contents = file.read()
+            st.write(dosages_contents)
+            st.write(dosages_dictionary)
 placeholder = st.empty()
 with placeholder.container():
     st.write("test")
