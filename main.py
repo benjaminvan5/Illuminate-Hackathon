@@ -62,7 +62,7 @@ with st.container():
                         with open('data.txt', 'a') as file:
                             file.write(f"({medicine}, {daily_dosage}),")
                     elif daily_dosage.isdigit() and medication_form == "Tablet":
-                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tables")
+                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tablets")
                         with open('data.txt', 'a') as file:
                             file.write(f"({medicine}, {daily_dosage}),")
                     elif daily_dosage.isdigit() and medication_form == "Capsule":
