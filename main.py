@@ -83,8 +83,8 @@ with st.container():
 
         # Converts each (medicine, dosage) pair into a key-value element in a dictionary
         if medical_information != "":
-            medical_information = medical_information.rstrip(medical_information[-1])
-            dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
+            medical_information = medical_information.rstrip(medical_information[-1]) # Removes the comma at the end of the string (a,b),
+            dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')]) # Makes the data into a dictionary using list comprehension
         else:
             dictionary = {}
         with open('data.txt', 'r') as file:
