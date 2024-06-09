@@ -17,7 +17,7 @@ with st.container():
         st.title("MyMedMate")
         st.write("MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions.")
 
-    # apple gif (an apple a day keeps the doctor away!)
+    # apple gif (an apple a day keeps the doctor away!) https://discuss.streamlit.io/t/how-to-show-local-gif-image/3408/4
     with right_column:
         file_ = open("apple.gif", "rb")
         contents = file_.read()
@@ -138,6 +138,14 @@ with st.container():
                     st.write(f"**{buttons}**")
 
                 count += 1  
+
+     with right_column:
+        file_ = open("meds.gif", "rb")
+        contents = file_.read()
+        data_url = base64.b64encode(contents).decode("utf-8")
+        file_.close()
+        st.markdown(f'<img src="data:image/gif;base64,{data_url}" width="200">',unsafe_allow_html=True,)
+         
             #Clear button logic
             global clear_button
             clear_button = st.button("Clear all data")
