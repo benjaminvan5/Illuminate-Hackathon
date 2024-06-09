@@ -104,29 +104,25 @@ with st.container():
             count = 0
             for medicine in dictionary:
                 medicine = medicine[0].upper() + medicine[1:] # capatalises 1st letter of medicine
-                left, right = st.columns((5.9, 0.7)) # column for medicine name and amount of dose taken today
+                left, right = st.columns((4.9, 0.7)) # column for medicine name and amount of dose taken today
                
                 with left:
                     st.write(f"**{medicine}**")
                     
-                col1, col2, col3, col4 = st.columns((1.2, 1.2, 3.5, 0.7)) # columns for user input, progess bar and metric
+                col1, col2, col3 = st.columns((1.4, 3.5, 0.7)) # columns for user input, progess bar and metric
                 
                 with col1:
-                    increase = st.button("Increase", key = f"increase_ + {count}")
-
-                with col2:
-                    decrease = st.button("Decrease", key = f"decrease_ + {count}")
+                    dosages = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 0, on_change=update_dosage)
                  
-                with col3:
-                    dosages = 0 # remove dosages
+                with col2:
                     if dosages <= int(dictionary[medicine.lower()]):
-                        progress_bar = col3.progress(dosages / int(dictionary[medicine.lower()]))
+                        progress_bar = col2.progress(dosages / int(dictionary[medicine.lower()]))
                     else:
-                        progress_bar = col3.progress(100) # max value of progress bar is 100
+                        progress_bar = col2.progress(100) # max value of progress bar is 100
                 
-                with col4:
+                with col3:
                     percent_increase = str(round(dosages / int(dictionary[medicine.lower()]) * 100)) + "%"
-                    col4.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
+                    col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
                     st.write(f"Medicine: {medicine}. Dosages: {dosages} - debug purposes")
                     
                 with right:
@@ -164,7 +160,6 @@ with st.container():
             dosages_contents = file.read()
             st.write(dosages_contents)
             st.write(dosages_dictionary)
-        
 placeholder = st.empty()
 with placeholder.container():
     st.write("test")
