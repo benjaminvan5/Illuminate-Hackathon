@@ -96,7 +96,7 @@ with st.container():
             contents = file.read()
 
 
-        # Dictionary to store dosages
+        # Dictionary to store dosages. This saves the medication that the user has taken during the day.
         dosages_dictionary = {}
         if len(medicine) > 0:
             dosages_information = dosages_data.read()
@@ -106,8 +106,6 @@ with st.container():
                 dosages_dictionary = {}
             with open('dosages.txt', 'r') as file:
                 dosages_contents = file.read()
-                st.write(dosages_contents)
-                st.write(dosages_dictionary)
 
 
 
