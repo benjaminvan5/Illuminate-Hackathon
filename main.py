@@ -104,12 +104,12 @@ with st.container():
             count = 0
             for medicine in dictionary:
                 medicine = medicine[0].upper() + medicine[1:] # capatalises 1st letter of medicine
-                left, right = st.columns((4.9, 0.7)) # column for medicine name and amount of dose taken today
+                left, right = st.columns((5.9, 0.7)) # column for medicine name and amount of dose taken today
                
                 with left:
                     st.write(f"**{medicine}**")
                     
-                col1, col2, col3, col4 = st.columns((1, 1, 3.5, 0.7)) # columns for user input, progess bar and metric
+                col1, col2, col3, col4 = st.columns((1.2, 1.2, 3.5, 0.7)) # columns for user input, progess bar and metric
                 
                 with col1:
                     increase = st.button("Increase", key = f"increase_ + {count}")
