@@ -85,10 +85,7 @@ with st.container():
           medical_information = medical_information.rstrip(medical_information[-1])
           dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
         else: dictionary = {}
-        with open('data.txt', 'r') as file:
-            contents = file.read()
-            st.write(contents)
-            st.write(dictionary)
+        
         
 
         
@@ -161,7 +158,11 @@ with st.container():
                 
                 show_cleardialog()
 
-
+with st.container():
+    with open('data.txt', 'r') as file:
+                contents = file.read()
+                st.write(contents)
+                st.write(dictionary)
 
 
 placeholder = st.empty()
