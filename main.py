@@ -18,7 +18,7 @@ with st.container():
         st.subheader("Hi, I'm your digital medicine tracker :wave:")
         st.title("MyMedMate")
         st.write(
-            "MyMedApp helps patients manage their medications by tracking dosages, and providing essential information on potential drug interactions.")
+            "MyMedApp helps patients manage their medications by tracking dosages.")
 
     # apple gif (an apple a day keeps the doctor away!) https://discuss.streamlit.io/t/how-to-show-local-gif-image/3408/4
     with right_column:
@@ -80,7 +80,12 @@ with st.container():
         elif len(medicine) == 0 or ',' in medicine:
             st.write("Invalid Medicine Name.")
         medical_information = data.read()
-
+        
+    with left_column:
+        st.subheader("Our Goal Is To")
+        st.write("We aim to assist users with managing their medication effectively by providing an accessible platform for tracking and managing daily medication intake.")
+        st.write("Medication non-adherence is a prominent issue worldwide leading to 125,000 deaths in the U.S alone. As a team, we created a suitable software solution in order to combat this pressing issue. We used the python library, streamlit, to create a frontend for a website that reminds users to take their medication. Users input their specific medication, as well as their recommended dosage per day, and once the day is over, the website reminds the user to take their medication.")
+        
         # Converts each (medicine, dosage) pair into a key-value element in a dictionary
         if medical_information != "":
             medical_information = medical_information.rstrip(medical_information[-1])
@@ -174,7 +179,12 @@ with st.container():
 
                 show_cleardialog()
 
-
+    with right_column: # medication gif
+        file_ = open("meds.gif", "rb")
+        contents = file_.read()
+        data_url = base64.b64encode(contents).decode("utf-8")
+        file_.close()
+        st.markdown(f'<img src="data:image/gif;base64,{data_url}" width="400" style="display: block; margin: 0 auto;">', unsafe_allow_html=True)
 
 
 placeholder = st.empty()
