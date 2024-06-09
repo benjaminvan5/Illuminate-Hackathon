@@ -54,16 +54,22 @@ with st.container():
                             st.write("mL")
                     daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?")
                     if len(daily_dosage) > 0:
-                        with open('data.txt', 'a') as file:
-                                file.write(f"({medicine}, {daily_dosage}),")
                         if daily_dosage.isdigit() and medication_form == "Liquid":
                             st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
+                            with open('data.txt', 'a') as file:
+                                file.write(f"({medicine}, {daily_dosage}),")
                         elif daily_dosage.isdigit() and medication_form == "Topical":
                             st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
+                            with open('data.txt', 'a') as file:
+                                file.write(f"({medicine}, {daily_dosage}),")
                         elif daily_dosage.isdigit() and medication_form == "Tablet":    
                             st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tables")
+                            with open('data.txt', 'a') as file:
+                                file.write(f"({medicine}, {daily_dosage}),")
                         elif daily_dosage.isdigit() and medication_form == "Capsule":
                             st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} capsules")
+                            with open('data.txt', 'a') as file:
+                                file.write(f"({medicine}, {daily_dosage}),")
                         else:
                             st.write("Please enter an integer") 
     
