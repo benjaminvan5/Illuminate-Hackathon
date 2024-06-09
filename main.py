@@ -107,8 +107,7 @@ with st.container():
                 dosages_contents = file.read()
                 st.write(dosages_contents)
                 st.write(dosages_dictionary)
-            if len(dosages_dictionary) > 0:
-                st.write(dosages_dictionary["panadol"])
+
 
 
     # Function for updating dosage to a text file
