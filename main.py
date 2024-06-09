@@ -94,10 +94,15 @@ with st.container():
           medical_information = medical_information.rstrip(medical_information[-1])
           dosages_dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
         else: dosages_dictionary = {}
+        with open('data.txt', 'r') as file:
+            contents = file.read()
+            st.write(contents)
+            st.write(dictionary)
         with open('dosages.txt', 'r') as file:
             contents = file.read()
             st.write(contents)
             st.write(dosages_dictionary)
+
     # Function for updating dosage to a text file
     def update_dosage():
         with open('dosages.txt', 'a') as file:
@@ -158,11 +163,7 @@ with st.container():
                 
                 show_cleardialog()
 
-with st.container():
-    with open('data.txt', 'r') as file:
-                contents = file.read()
-                st.write(contents)
-                st.write(dictionary)
+
 
 
 placeholder = st.empty()
