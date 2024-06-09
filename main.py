@@ -88,14 +88,14 @@ with st.container():
             st.write(contents)
             st.write(dictionary)
 
+    # Function for updating dosage to a text file
+    def update_dosage():
+        with open('dosages.txt', 'a') as file:
+            file.write(f"(Medicine: {medicine}. Dosages: {buttons})")
+        pass
 
-     # Function for updating dosage to a text file   
-         def update_dosage():
-            with open('dosages.txt', 'a') as file:
-                file.write(f"(Medicine: {medicine}. Dosages: {buttons})")
-            pass
 
-    
+
     # daily tracker
     if len(dictionary) > 0:
         with right_column:
@@ -122,12 +122,13 @@ with st.container():
                 with col3:
                     percent_increase = str(round(buttons / int(dictionary[medicine.lower()]) * 100)) + "%" 
                     col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
+                    st.write(f"Medicine: {medicine}. Dosages: {buttons} - debug purposes")
                     
                 with right:
                     st.write(f"**{buttons}**")
 
                 count += 1  
-           # Clear button logic     
+            #Clear button logic
             global clear_button
             clear_button = st.button("Clear all data")
             if clear_button:
