@@ -49,6 +49,8 @@ with st.container():
         elif len(medicine) == 0:
             st.write("Medicine not entered.")
         medical_information = data.read()
+
+        # Converts each (medicine, dosage) pair into a key-value element in a dictionary 
         if medical_information != "":
           medical_information = medical_information.rstrip(medical_information[-1])
           dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
