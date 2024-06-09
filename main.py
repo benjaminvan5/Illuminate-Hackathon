@@ -106,7 +106,10 @@ with st.container():
                     buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}')
                  
                 with col2:
-                    progress_bar = col2.progress(buttons / int(dictionary[medicine.lower()]))
+                    if buttons <= int(dictionary[medicine.lower()]):
+                        progress_bar = col2.progress(buttons / int(dictionary[medicine.lower()]))
+                    else:
+                        progress_bar = col2.progress(100) # max value of progress bar is 100
                 
                 with col3:
                     percent_increase = str(round(buttons / int(dictionary[medicine.lower()]) * 100)) + "%" 
