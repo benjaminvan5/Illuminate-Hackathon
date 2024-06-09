@@ -94,25 +94,29 @@ with st.container():
             st.subheader("Daily Tracker")
             count = 0
             for medicine in dictionary:
-                medicine = medicine[0].upper() + medicine[1:]
-                left, right = st.columns((6, 1))
+                medicine = medicine[0].upper() + medicine[1:] # capatalises 1st letter of medicine
+                left, right = st.columns((4.4, 1)) # column for medicine name and amount of dose taken today
+               
                 with left:
                     st.write(f"**{medicine}**")
-                with right:
-                    st.write("**3**")
-                col1, col2, col3, col4 = st.columns((1,1,4, 1))
-                progress_bar = col3.progress(10)
-                count += 1 
+                    
+                col1, col2, col3 = st.columns((1.4, 3, 1)) # columns for user input, progess bar and metric
+                
                 with col1:
-                    increase = st.button("increase", key = count) # adding a unique key removes the error DuplicateWidgetID: There are multiple identical st.selectbox widgets with the same generated key.
-                    if increase:
-                        pass
+                    buttons = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}')
+                 
                 with col2:
-                    decrease = st.button("decrease", key = count + 100)
-                    if increase:
-                        pass
-                with col4:
-                    col4.metric(label = "5", value = "7", delta = "10%", label_visibility = "collapsed")
+                    progress_bar = col2.progress(buttons / int(dictionary[medicine.lower()]))
+                
+                with col3:
+                    percent_increase = str(round(buttons / int(dictionary[medicine.lower()]) * 100)) + "%" 
+                    col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
+                    
+                with right:
+                    st.write(f"**{buttons}**")
+
+                count += 1  
+                
             global clear_button
             clear_button = st.button("Clear all data")
             if clear_button:
