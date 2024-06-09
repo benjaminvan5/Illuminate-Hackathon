@@ -98,6 +98,10 @@ with st.container():
             contents = file.read()
             st.write(contents)
             st.write(dictionary)
+        with open('dosages.txt', 'r') as file:
+            contents = file.read()
+            st.write(contents)
+            st.write(dosages_dictionary)
         
 
     # Function for updating dosage to a text file
@@ -160,11 +164,6 @@ with st.container():
                 
                 show_cleardialog()
 
-with st.container():
-    with open('dosages.txt', 'r') as file:
-            contents = file.read()
-            st.write(contents)
-            st.write(dosages_dictionary)
 
 
 placeholder = st.empty()
