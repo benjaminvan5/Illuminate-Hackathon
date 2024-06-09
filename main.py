@@ -166,7 +166,7 @@ with st.container():
             dosages_contents = file.read()
             st.write(dosages_contents)
             st.write(dosages_dictionary)
-    st.write(dosages_dictionary["panadol"])
+    st.write(dosages_dictionary[medicine])
 placeholder = st.empty()
 with placeholder.container():
     st.write("test")
