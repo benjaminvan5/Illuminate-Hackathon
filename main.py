@@ -120,13 +120,13 @@ with st.container():
                 with col3:
                     dosages = 0 # remove dosages
                     if dosages <= int(dictionary[medicine.lower()]):
-                        progress_bar = col2.progress(dosages / int(dictionary[medicine.lower()]))
+                        progress_bar = col3.progress(dosages / int(dictionary[medicine.lower()]))
                     else:
-                        progress_bar = col2.progress(100) # max value of progress bar is 100
+                        progress_bar = col3.progress(100) # max value of progress bar is 100
                 
                 with col4:
                     percent_increase = str(round(dosages / int(dictionary[medicine.lower()]) * 100)) + "%"
-                    col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
+                    col4.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
                     st.write(f"Medicine: {medicine}. Dosages: {dosages} - debug purposes")
                     
                 with right:
