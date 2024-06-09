@@ -34,15 +34,38 @@ with st.container():
                 if clear_yes:
                     with open('data.txt', 'w') as file:
                         pass
-            else:
-                daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?")
-                if len(daily_dosage) > 0:
-                    if daily_dosage.isdigit():
-                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage}")
+            else: #radio buttons
+                medication_form_name = ['Tablet', 'Liquid', 'Capsule', 'Topical'] 
+                medication_form = st.radio('Form of Medication', medication_form_name, index = None)
+                with middle_column:
+                        st.write('#') #blank text to make units of medication aligned with user input
+                        st.write('#')
+                        st.write('#')
+
+                if medication_form:
+                    if medication_form == "Tablet":
+                        with middle_column:
+                            st.write("tablets")
+                    elif medication_form == "Capsule":
+                        with middle_column:
+                            st.write("capsules")
+                    elif medication_form == "Liquid" or medication_form == "Topical":
+                        with middle_column:
+                            st.write("mL")
+                    daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?")
+                    if len(daily_dosage) > 0:
                         with open('data.txt', 'a') as file:
-                            file.write(f"({medicine}, {daily_dosage}),")
-                    else:
-                        st.write("Please enter an integer")
+                                file.write(f"({medicine}, {daily_dosage}),")
+                        if daily_dosage.isdigit() and medication_form == "Liquid":
+                            st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
+                        elif daily_dosage.isdigit() and medication_form == "Topical":
+                            st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
+                        elif daily_dosage.isdigit() and medication_form == "Tablet":    
+                            st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tables")
+                        elif daily_dosage.isdigit() and medication_form == "Capsule":
+                            st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} capsules")
+                        else:
+                            st.write("Please enter an integer") 
     
         
         # Medicine input validation
