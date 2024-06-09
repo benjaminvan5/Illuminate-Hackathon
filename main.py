@@ -109,18 +109,22 @@ with st.container():
                 with left:
                     st.write(f"**{medicine}**")
                     
-                col1, col2, col3 = st.columns((1.4, 3.5, 0.7)) # columns for user input, progess bar and metric
+                col1, col2, col3, col4 = st.columns((1, 1, 3.5, 0.7)) # columns for user input, progess bar and metric
                 
                 with col1:
-                    dosages = st.number_input("test", step = 1, label_visibility = "collapsed", key = f'{count}', min_value = 0, on_change=update_dosage)
-                 
+                    increase = st.button("Increase")
+
                 with col2:
+                    decrease = st.button("Decrease")
+                 
+                with col3:
+                    dosages = 0 # remove dosages
                     if dosages <= int(dictionary[medicine.lower()]):
                         progress_bar = col2.progress(dosages / int(dictionary[medicine.lower()]))
                     else:
                         progress_bar = col2.progress(100) # max value of progress bar is 100
                 
-                with col3:
+                with col4:
                     percent_increase = str(round(dosages / int(dictionary[medicine.lower()]) * 100)) + "%"
                     col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
                     st.write(f"Medicine: {medicine}. Dosages: {dosages} - debug purposes")
