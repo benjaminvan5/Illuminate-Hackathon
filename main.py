@@ -4,6 +4,7 @@ import datetime
 
 st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
+#Data for medication + daily dosage, dosages
 data = open('data.txt', 'r')
 dosages_data = open('dosages.txt', 'r')
 
@@ -77,7 +78,7 @@ with st.container():
                         st.write("Please enter an integer")
 
 
-        # Medicine input validation
+        # Medicine input validation. Commas break the dictionary algorithm
         elif len(medicine) == 0 or ',' in medicine:
             st.write("Invalid Medicine Name.")
         medical_information = data.read()
@@ -110,7 +111,7 @@ with st.container():
 
 
 
-    # Function for updating dosage to a text file
+    # Function for updating and writing dosage to a text file
     def update_dosage():
         with open('dosages.txt', 'a') as file:
             file.write(
