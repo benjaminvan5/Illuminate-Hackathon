@@ -94,7 +94,7 @@ with st.container():
 
         # Dictionary to store dosages
         dosages_dictionary = {}
-        if len(medicine) > 0:
+        if len(daily_dosage) > 0:
             dosages_information = dosages_data.read()
             if dosages_information != "":
                 dosages_information = dosages_information.rstrip(dosages_information[-1])
