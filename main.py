@@ -94,7 +94,15 @@ with st.container():
             file.write(f"(Medicine: {medicine}. Dosages: {buttons})")
         pass
 
-
+        # Dictionary to store dosages
+        if medical_information != "":
+          medical_information = medical_information.rstrip(medical_information[-1])
+          dosages_dictionary = dict([x.split(',') for x in medical_information[1:-1].split('),(')])
+        else: dosages_dictionary = {}
+        with open('dosages.txt', 'r') as file:
+            contents = file.read()
+            st.write(contents)
+            st.write(dosages_dictionary)
 
     # daily tracker
     if len(dictionary) > 0:
