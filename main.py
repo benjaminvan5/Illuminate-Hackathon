@@ -88,12 +88,7 @@ with st.container():
             st.write(contents)
             st.write(dictionary)
 
-    # Function for updating dosage to a text file
-    def update_dosage():
-        with open('dosages.txt', 'a') as file:
-            file.write(f"({medicine.lower()}, {buttons}),") #buttons is the number on the right that you increase/decrease on the website
-        pass
-
+        
         # Dictionary to store dosages
         if medical_information != "":
           medical_information = medical_information.rstrip(medical_information[-1])
@@ -103,6 +98,13 @@ with st.container():
             contents = file.read()
             st.write(contents)
             st.write(dosages_dictionary)
+    # Function for updating dosage to a text file
+    def update_dosage():
+        with open('dosages.txt', 'a') as file:
+            file.write(f"({medicine.lower()}, {buttons}),") #buttons is the number on the right that you increase/decrease on the website
+        pass
+
+
 
     # daily tracker
     if len(dictionary) > 0:
