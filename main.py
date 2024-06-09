@@ -5,9 +5,9 @@ st.set_page_config(page_title="Test Title", page_icon=":tada:", layout="wide")
 
 data = open('data.txt', 'r')
 
-def clear_text():
-    st.session_state.my_text = st.session_state.widget
-    st.session_state.widget = ""
+def clear_text(): # for clearing medicine and dosage
+    st.session_state.medicine = ""
+    st.session_state.dosage = ""
 
 with st.container():
     left_column, right_column  = st.columns((4,1))
@@ -26,55 +26,51 @@ with st.container():
         st.markdown(f'<img src="data:image/gif;base64,{data_url}" width="200">',unsafe_allow_html=True,)
 
 with st.container():
+    global file
     st.divider()
     left_column, middle_column, right_column  = st.columns((2,1,2))
     with left_column:
-        medicine = st.text_input("What medicine are you currently taking?").lower()
+        medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
         if len(medicine) > 0:
-            if "/clear" in medicine:
-                st.write("Press Confirm if you want to clear your medicine and dosage information. Otherwise enter the medicine you are currently taking.")
-                clear_yes = st.button("Confirm")
-                if clear_yes:
-                    with open('data.txt', 'w') as file:
-                        pass
-            else: #radio buttons
-                medication_form_name = ['Tablet', 'Liquid', 'Capsule', 'Topical'] 
-                medication_form = st.radio('Form of Medication', medication_form_name, index = None)
-                with middle_column:
-                        st.write('#') #blank text to make units of medication aligned with user input
-                        st.write('#')
-                        st.write('#')
 
-                if medication_form:
-                    if medication_form == "Tablet":
-                        with middle_column:
-                            st.write("tablets")
-                    elif medication_form == "Capsule":
-                        with middle_column:
-                            st.write("capsules")
-                    elif medication_form == "Liquid" or medication_form == "Topical":
-                        with middle_column:
-                            st.write("mL")
-                    daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?")
-                    if len(daily_dosage) > 0:
-                        if daily_dosage.isdigit() and medication_form == "Liquid":
-                            st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
-                            with open('data.txt', 'a') as file:
-                                file.write(f"({medicine}, {daily_dosage}),")
-                        elif daily_dosage.isdigit() and medication_form == "Topical":
-                            st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
-                            with open('data.txt', 'a') as file:
-                                file.write(f"({medicine}, {daily_dosage}),")
-                        elif daily_dosage.isdigit() and medication_form == "Tablet":    
-                            st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tables")
-                            with open('data.txt', 'a') as file:
-                                file.write(f"({medicine}, {daily_dosage}),")
-                        elif daily_dosage.isdigit() and medication_form == "Capsule":
-                            st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} capsules")
-                            with open('data.txt', 'a') as file:
-                                file.write(f"({medicine}, {daily_dosage}),")
-                        else:
-                            st.write("Please enter an integer") 
+        #radio buttons
+            medication_form_name = ['Tablet', 'Liquid', 'Capsule', 'Topical']
+            medication_form = st.radio('Form of Medication', medication_form_name, index = None)
+            with middle_column:
+                    st.write('#') #blank text to make units of medication aligned with user input
+                    st.write('#')
+                    st.write('#')
+
+            if medication_form:
+                if medication_form == "Tablet":
+                    with middle_column:
+                        st.write("tablets")
+                elif medication_form == "Capsule":
+                    with middle_column:
+                        st.write("capsules")
+                elif medication_form == "Liquid" or medication_form == "Topical":
+                    with middle_column:
+                        st.write("mL")
+                daily_dosage = st.text_input(f"What is your daily dosage of {medicine}?", key="dosage")
+                if len(daily_dosage) > 0:
+                    if daily_dosage.isdigit() and medication_form == "Liquid":
+                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
+                        with open('data.txt', 'a') as file:
+                            file.write(f"({medicine}, {daily_dosage}),")
+                    elif daily_dosage.isdigit() and medication_form == "Topical":
+                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} mL")
+                        with open('data.txt', 'a') as file:
+                            file.write(f"({medicine}, {daily_dosage}),")
+                    elif daily_dosage.isdigit() and medication_form == "Tablet":
+                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tables")
+                        with open('data.txt', 'a') as file:
+                            file.write(f"({medicine}, {daily_dosage}),")
+                    elif daily_dosage.isdigit() and medication_form == "Capsule":
+                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} capsules")
+                        with open('data.txt', 'a') as file:
+                            file.write(f"({medicine}, {daily_dosage}),")
+                    else:
+                        st.write("Please enter an integer")
     
         
         # Medicine input validation
@@ -116,7 +112,25 @@ with st.container():
                     if increase:
                         pass
                 with col4:
-                    col4.metric(label = "5", value = "7", delta = "10%", label_visibility = "collapsed") 
+                    col4.metric(label = "5", value = "7", delta = "10%", label_visibility = "collapsed")
+    global clear_button
+    clear_button = st.button("Clear all data")
+    if clear_button:
+        @st.experimental_dialog("Clear all entries?", width="small")
+        def show_cleardialog():
+            global clear_button, file
+            st.write("Press Confirm if you want to clear all of your medicine and dosage information.")
+
+            if st.button("Confirm", on_click=clear_text):
+                clear_button = False
+                with open('data.txt', 'w') as file:
+                    pass
+                st.rerun()
+
+
+
+
+        show_cleardialog()
 
 
 placeholder = st.empty()
