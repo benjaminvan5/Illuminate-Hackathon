@@ -85,7 +85,8 @@ with st.container():
         else: dictionary = {}
         with open('data.txt', 'r') as file:
             contents = file.read()
-
+            st.write(contents)
+            st.write(dictionary)
 
 
 
@@ -122,7 +123,7 @@ with st.container():
                 with col3:
                     percent_increase = str(round(dosages / int(dictionary[medicine.lower()]) * 100)) + "%"
                     col3.metric(label = "secret", value = f"{dictionary[medicine.lower()]}", delta = percent_increase, label_visibility = "collapsed")
-
+                    st.write(f"Medicine: {medicine}. Dosages: {dosages} - debug purposes")
                     
                 with right:
                     st.write(f"**{dosages}**")
@@ -157,7 +158,8 @@ with st.container():
         else: dosages_dictionary = {}
         with open('dosages.txt', 'r') as file:
             dosages_contents = file.read()
- 
+            st.write(dosages_contents)
+            st.write(dosages_dictionary)
 placeholder = st.empty()
 with placeholder.container():
     st.write("test")
