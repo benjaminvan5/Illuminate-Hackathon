@@ -4,4 +4,4 @@ The medicine input is stored as a string and the dosage input accepts integers.
 Different types of dosages can be selected.
 The medicine-dosage pair is then stored in a dictionary to use in the daily tracker.
 
-Note: Requires streamlit module to be installed
+https://illuminate-hackathon-5ckb3xkufdlj8tj6asjbbs.streamlit.app/
