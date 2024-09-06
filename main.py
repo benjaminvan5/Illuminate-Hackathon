@@ -6,7 +6,6 @@ st.set_page_config(page_title="MyMedMate", page_icon=":tada:", layout="wide")
 
 # Data for medication + daily dosage, dosages
 data = open('data.txt', 'r')
-dosages_data = open('dosages.txt', 'r')
 dosages_track_dictionary = {} 
 
 # converting dosages_track.txt into a dictionary
