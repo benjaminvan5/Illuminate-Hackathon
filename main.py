@@ -4,9 +4,22 @@ import datetime
 
 st.set_page_config(page_title="MyMedMate", page_icon=":tada:", layout="wide")
 
-#Data for medication + daily dosage, dosages
+# Data for medication + daily dosage, dosages
 data = open('data.txt', 'r')
 dosages_data = open('dosages.txt', 'r')
+dosages_track_dictionary = {} 
+
+# converting dosages_track.txt into a dictionary
+try:
+    with open('dosages_track.txt', 'r') as dosages_read:
+        for line in dosages_read:
+            medicine, dosage = line.split()
+            dosages_track_dictionary[medicine] = dosage
+
+except:
+    pass
+
+# print(dosages_track_dictionary)
 
 def clear_text():  # for clearing medicine and dosage
     st.session_state.medicine = ""
@@ -35,7 +48,7 @@ with st.container():
     st.divider()
     left_column, middle_column, right_column = st.columns((2, 0.7, 2)) # left column is for user medication input, right column is for daily tracker and middle is for separation between the two
     with left_column:
-        medicine = st.text_input("What medicine are you currently taking?", key="medicine").lower()
+        medicine = st.text_input("What medicine are you currently taking?", key="medicine").title()
         if len(medicine) > 0 and not ("," in medicine): # if user inputs a comma (eg Panadol,) then it causes the dictionary to malfunction hence "and not ("," in medicine)" is added 
 
             # radio buttons
@@ -67,7 +80,7 @@ with st.container():
                         with open('data.txt', 'a') as file:
                             file.write(f"({medicine}, {daily_dosage}),")
                     elif daily_dosage.isdigit() and medication_form == "Tablet":
-                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tables")
+                        st.write(f"Medicine: {medicine}. Daily Dosage: {daily_dosage} tablets")
                         with open('data.txt', 'a') as file:
                             file.write(f"({medicine}, {daily_dosage}),")
                     elif daily_dosage.isdigit() and medication_form == "Capsule":
@@ -98,34 +111,13 @@ with st.container():
             contents = file.read()
 
 
-        # Dictionary to store dosages. This saves the medication that the user has taken during the day.
-        dosages_dictionary = {}
-        if len(medicine) > 0:
-            dosages_information = dosages_data.read()
-            if dosages_information != "":
-                dosages_information = dosages_information.rstrip(dosages_information[-1])
-            else:
-                dosages_dictionary = {}
-            with open('dosages.txt', 'r') as file:
-                dosages_contents = file.read()
-
-
-
-    # Function for updating and writing dosage to a text file
-    def update_dosage():
-        with open('dosages.txt', 'a') as file:
-            file.write(
-                f"({medicine.lower()}, {dosages}),")  # buttons is the number on the right that you increase/decrease on the website
-        pass
-
-
     # daily tracker
     if len(dictionary) > 0:
         with right_column:
             st.subheader("Daily Tracker 📅")
             count = 0
             for medicine in dictionary:
-                medicine = medicine[0].upper() + medicine[1:]  # capatalises 1st letter of medicine
+                # medicine = medicine[0].upper() + medicine[1:]  # capatalises 1st letter of medicine
                 left, right = st.columns((4.9, 0.7))  # column for medicine name and amount of dose taken today
 
                 with left:
@@ -134,26 +126,45 @@ with st.container():
                 col1, col2, col3 = st.columns((1.4, 3.5, 0.7))  # columns for user number input, progess bar and metric (metric is daily dosage and percentage of daily dosage taken)
                 
                 with col1: # user number input
-                    dosages = st.number_input("test", step=1, label_visibility="collapsed", key=f'{count}', min_value=0,
-                                              on_change=update_dosage)
+                    try:
+                        dosages = int(dosages_track_dictionary[medicine])
+                        dosages = st.number_input("test", value = dosages, step=1, label_visibility="collapsed", key=f'{count}', min_value=0,
+                        )
+            
+                    except:
+                        dosages = st.number_input("test", value = 0, step=1, label_visibility="collapsed", key=f'{count}', min_value=0,
+                        )
+
+
 
                 with col2: # progress bar
-                    if dosages <= int(dictionary[medicine.lower()]):
-                        progress_bar = col2.progress(dosages / int(dictionary[medicine.lower()]))
+                    if dosages <= int(dictionary[medicine]):
+                        progress_bar = col2.progress(dosages / int(dictionary[medicine]))
                     else:
                         progress_bar = col2.progress(100)  # max value of progress bar is 100
 
                 with col3: # metric (metric is daily dosage and percentage of daily dosage taken)
-                    percent_increase = str(round(dosages / int(dictionary[medicine.lower()]) * 100)) + "%"
-                    col3.metric(label="secret", value=f"{dictionary[medicine.lower()]}", delta=percent_increase,
+                    percent_increase = str(round(dosages / int(dictionary[medicine]) * 100)) + "%"
+                    col3.metric(label="secret", value=f"{dictionary[medicine]}", delta=percent_increase,
                             label_visibility="collapsed")
 
                 with right:
                     st.write(f"**{dosages}**")
 
                 count += 1
+                
+                # Creating a dictionary to save medicine + medicine dosage
+                dosages_track_dictionary[medicine] = dictionary.get(None, dosages)
 
-                # Clear button logic
+            # Save button saves the dictionary into dosages_track.txt
+            global save_button
+            save_button = st.button("Save all data")
+            if save_button:
+                with open('dosages_track.txt', 'w') as dosages_track:
+                    for medicine, dosages in dosages_track_dictionary.items():
+                        dosages_track.write(f"{medicine.title()} {dosages}\n")
+
+            # Clear button logic
             global clear_button
             clear_button = st.button("Clear all data")
             if clear_button:
@@ -166,12 +177,13 @@ with st.container():
                         clear_button = False
                         with open('data.txt', 'w') as file:
                             pass
-                        with open('dosages.txt', 'w') as file:
+                        with open('dosages_track.txt', 'w') as file:
                             pass
+                        dosages_track_dictionary = {}
                         st.rerun()
 
-
                 show_cleardialog()
+
 
     with right_column: # medication gif
         file_ = open("meds.gif", "rb")
